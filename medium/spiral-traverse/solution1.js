@@ -1,3 +1,17 @@
+/*
+
+  Not exactly proud of this hack, can be simplified by using left and right pointers
+  We know that each spiral has a width of 1 and a height of 1
+  in other words, we can let i and j define the size and position of each spiral
+  a bit of a divide and conquer approach, each spiral now becomes simpler to traverse
+  all you have to watch out for in each spiral are the corners
+
+  --- The stars are the corners ---
+  [* . . . *]
+  [. . . . .]
+  [. . . . .]
+  [* . . . *]
+*/
 function spiralTraverse(array) {
   var result = [];
   var seen = [];
