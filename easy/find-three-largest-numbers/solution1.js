@@ -1,32 +1,21 @@
 function findThreeLargestNumbers(array) {
-  var numbers = array;
-  var result = [0, 0, 0];
-  var hits = {};
-  var indices = {};
+  let largest = [null, null, null];
 
-  for (var i = 2; i >= 0; i--) {
-    var match = findLargest(array, indices);
-    indices[match.index] = true;
-    result[i] = match.value;
-    console.log(match);
-  }
-
-  console.log(result);
-  return result;
-}
-function findLargest(array, avoid) {
-  var max = -1000000;
-  var index = 0;
-  for (var i = 0; i < array.length; i++) {
-    if (array[i] > max && !avoid[i]) {
-      max = array[i];
-      index = i;
+  for (let i = 0; i < array.length; i++) {
+    let value = array[i];
+    if (largest[0] === null || largest[0] < value) {
+      largest[2] = largest[1];
+      largest[1] = largest[0];
+      largest[0] = value;
+    } else if (largest[1] === null || largest[1] < value) {
+      largest[2] = largest[1];
+      largest[1] = value;
+    } else if (largest[2] === null || largest[2] < value) {
+      largest[2] = value;
     }
   }
-  return {
-    value: max,
-    index: index,
-  };
+
+  return [largest[2], largest[1], largest[0]];
 }
 
 // Do not edit the line below.
