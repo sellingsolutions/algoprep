@@ -1,19 +1,44 @@
 function binarySearch(array, target) {
-  // Write your code here.
+  console.log("array " + array);
+  console.log("target " + target);
 
-  return find(array, target, 0, array.length - 1);
-}
-function find(array, target, left, right) {
-  if (left > right) return -1;
+  let size = array.length;
+  let pos = size / 2;
+  let start = 0;
+  let end = array.length;
+  let checks = 0;
 
-  const middleIndex = ~~((left + right) / 2);
-  const middleValue = array[middleIndex];
-  console.log(`${middleIndex} ${middleValue}`);
+  // Instead of checking if we've exhausted every single index in the array
+  // we should probably realize that we can just check whether the start index has exceeded the end index
+  // the start index only exceeds the end index when the target doesn't exist in the array
 
-  if (middleValue === target) return middleIndex;
+  while (checks < array.length) {
+    let index = start + pos;
+    let value = array[index];
 
-  if (target < middleValue) return find(array, target, left, middleIndex - 1);
-  else return find(array, target, middleIndex + 1, right);
+    if (target === value) {
+      return index;
+    } else if (target < value) {
+      console.log(
+        `target(${target}) < value(${value}) setting end(${end}) = pos(${pos}) index(${index})`
+      );
+      end = index;
+    } else if (target > value) {
+      console.log(
+        `target(${target}) > value(${value}) setting start(${start}) = pos(${pos}) index(${index})`
+      );
+      start = index;
+    }
+
+    size = end - start;
+    pos = Math.trunc(size / 2);
+    console.log(`size(${size}) = end(${end}) - start(${start})`);
+    console.log(`pos(${pos}) = size(${size}) / 2`);
+
+    checks++;
+  }
+
+  return -1;
 }
 
 // Do not edit the line below.
